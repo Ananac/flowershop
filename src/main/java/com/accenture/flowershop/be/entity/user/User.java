@@ -1,12 +1,17 @@
 package com.accenture.flowershop.be.entity.user;
 
+import javax.persistence.Entity;
+import java.math.BigDecimal;
+
+@Entity
 public class User {
+    private Long id;
     private String username;
     private String password;
     private String fullName;
     private String email;
     private String address;
-    private double balance;
+    private BigDecimal balance;
     private int discount;
 
     public String getUsername() {
@@ -41,11 +46,19 @@ public class User {
         this.address = address;
     }
 
-    public double getBalance() {
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public BigDecimal getBalance() {
         return balance;
     }
 
-    public void setBalance(double balance) {
+    public void setBalance(BigDecimal balance) {
         this.balance = balance;
     }
 

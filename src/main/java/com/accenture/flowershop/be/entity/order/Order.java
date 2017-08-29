@@ -1,24 +1,40 @@
 package com.accenture.flowershop.be.entity.order;
 
-import com.accenture.flowershop.be.entity.flower.Flower;
-
+import javax.persistence.Entity;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
-public class Order{
-
-    private String id;
+@Entity
+public class Order {
+    private Long id;
     private Date orderDate;
-    private int orderNum;
-    private List<Flower> Items;
-    private double subTotal;
+    List<OrderItem> items;
+    private BigDecimal subTotal;
 
-    public String getId() {
+
+    public List<OrderItem> getItems() {
+        return items;
+    }
+
+    public void setItems(List<OrderItem> items) {
+        this.items = items;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
+    }
+
+    public BigDecimal getSubTotal() {
+        return subTotal;
+    }
+
+    public void setSubTotal(BigDecimal subTotal) {
+        this.subTotal = subTotal;
     }
 
     public Date getOrderDate() {
@@ -29,28 +45,8 @@ public class Order{
         this.orderDate = orderDate;
     }
 
-    public int getOrderNum() {
-        return orderNum;
-    }
-
-    public void setOrderNum(int orderNum) {
-        this.orderNum = orderNum;
-    }
-
-    public double getSubTotal() {
-        return subTotal;
-    }
-
-    public void setSubTotal(double subTotal) {
-        this.subTotal = subTotal;
-    }
-
-    public List<Flower> getItems() {
-        return Items;
-    }
-
-    public void setItems(List<Flower> items) {
-        Items = items;
+    public BigDecimal calculateSubtotal(int discount, BigDecimal price) {
+        return null;
     }
 
 

@@ -4,7 +4,7 @@ import com.accenture.flowershop.be.entity.user.User;
 
 public class UserBusinessServiceImpl implements UserBusinessService {
     @Override
-    public String login(String username, String password) {
+    public User login(String username, String password) {
         return null;
     }
 

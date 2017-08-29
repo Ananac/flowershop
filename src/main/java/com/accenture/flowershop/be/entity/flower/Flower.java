@@ -1,10 +1,15 @@
 package com.accenture.flowershop.be.entity.flower;
 
 
+import javax.persistence.Entity;
+import java.math.BigDecimal;
+
+@Entity
 public class Flower {
+    private Long id;
     private String name;
     private String description;
-    private double price;
+    private BigDecimal price;
     private int quantity;
 
     public String getName() {
@@ -23,14 +28,6 @@ public class Flower {
         this.description = description;
     }
 
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
     public int getQuantity() {
         return quantity;
     }
@@ -39,5 +36,15 @@ public class Flower {
         this.quantity = quantity;
     }
 
+    public Long getId() {
+        return id;
+    }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
 }

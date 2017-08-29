@@ -7,16 +7,16 @@ import java.util.Date;
 import java.util.List;
 
 public interface OrderDAO {
-    Order get(String id);
-    void create(Order order);
-    void update(Order order);
-    void delete(String id);
+    Order get(Long id);
 
-    String getOrderByOrderNum(int orderNum);
+    void create(Order order);
+
+    void update(Order order);
+
+    void delete(Long id);
+
+
     String getOrderByUser(User user);
-    List getOrderByDate(Date date);
-    List getOrderBySubtotalRange(int minSubtotal, int maxSubTotal);
-    void deleteOrderByUser(User user);
 
 }
 

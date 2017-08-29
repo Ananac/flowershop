@@ -1,10 +1,12 @@
 package com.accenture.flowershop.be.business.order;
 
-import com.accenture.flowershop.be.entity.flower.Flower;
+import com.accenture.flowershop.be.entity.order.Order;
 
 public interface OrderBusinessService {
-    void addItem(Flower item);
-    void deleteItem(Flower item);
-    void calculateSubtotal();
-    void checkoutOrder();
+
+    void createOrder(Order order);
+
+    void updateStatus(Order order);
+
+    void deleteOrder(Order order);
 }

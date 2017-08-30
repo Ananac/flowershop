@@ -15,6 +15,15 @@ public class User {
     private String address;
     private BigDecimal balance;
     private int discount;
+    private boolean isAdmin;
+
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
+    }
 
     public String getUsername() {
         return username;

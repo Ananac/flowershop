@@ -1,5 +1,5 @@
 CREATE TABLE OrderItem (
-  id     INT NOT NULL,
-  orderid INT,
-  amount INT
+  id      IDENTITY NOT NULL,
+  orderid BIGINT   NOT NULL,
+  amount  INT      NOT NULL
 );

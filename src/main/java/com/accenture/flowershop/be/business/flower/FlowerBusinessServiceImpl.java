@@ -7,7 +7,7 @@ import java.util.List;
 
 public class FlowerBusinessServiceImpl implements FlowerBusinessService {
     @Override
-    public boolean checkAvailability(Long id, int amount) {
+    public boolean checkAvailability(String name, int amount) {
         return false;
     }
 
@@ -18,11 +18,6 @@ public class FlowerBusinessServiceImpl implements FlowerBusinessService {
 
     @Override
     public List<Flower> getFlowerByPriceRange(BigDecimal minPrice, BigDecimal maxPrice) {
-        return null;
-    }
-
-    @Override
-    public String getFlowersQuantityByName(String name, int quantity) {
         return null;
     }
 

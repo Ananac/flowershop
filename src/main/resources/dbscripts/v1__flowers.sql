@@ -1,9 +1,9 @@
 CREATE TABLE Flower (
-  id          INT         NOT NULL,
+  id          IDENTITY    NOT NULL,
   name        VARCHAR(50) NOT NULL,
   description TEXT,
-  price       DOUBLE,
-  quantity    INT
+  price       DOUBLE      NOT NULL,
+  quantity    INT         NOT NULL
 );
 
 

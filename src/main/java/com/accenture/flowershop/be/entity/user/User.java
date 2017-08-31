@@ -14,7 +14,7 @@ public class User {
     private String fullName;
     private String email;
     private String city;
-    private int zipCode;
+    private int zipcode;
     private String address;
     private BigDecimal balance;
     private int discount;

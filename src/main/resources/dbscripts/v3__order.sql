@@ -1,4 +1,4 @@
-CREATE TABLE "Order" (
+CREATE TABLE IF NOT EXISTS  "ORDER" (
   id           IDENTITY           NOT NULL,
   userid       BIGINT             NOT NULL,
   createdate   TIMESTAMP          NOT NULL,
@@ -8,5 +8,6 @@ CREATE TABLE "Order" (
                      'PROCESSING',
                      'SHIPPED',
                      'DELIVERED',
-                     'COMPLETED') NOT NULL
+                     'COMPLETED') NOT NULL,
+  FOREIGN KEY (userid) REFERENCES USER (id)
 );

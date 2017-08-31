@@ -1,4 +1,4 @@
-CREATE TABLE User (
+CREATE TABLE IF NOT EXISTS  USER (
   id       IDENTITY              NOT NULL,
   username VARCHAR(50)           NOT NULL,
   password VARCHAR(50)           NOT NULL,

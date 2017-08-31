@@ -8,14 +8,9 @@ import java.util.List;
 
 public interface OrderDAO {
     Order get(Long id);
-
     void create(Order order);
-
     void update(Order order);
-
     void delete(Long id);
-
-
     String getOrderByUser(User user);
 
 }

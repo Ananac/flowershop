@@ -12,4 +12,9 @@ public class UserBusinessServiceImpl implements UserBusinessService {
     public User register(String username, String email, String password, String fullName, String address) {
         return null;
     }
+
+    @Override
+    public void updateUser(User user) {
+
+    }
 }

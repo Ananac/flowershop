@@ -10,38 +10,6 @@ public class OrderItem {
     @Id
     private Long id;
     private Long orderId;
-    private Flower flower;
+    //    private Flower flower;
     private int amount;
-
-    public Flower getFlower() {
-        return flower;
-    }
-
-    public void setFlower(Flower flower) {
-        this.flower = flower;
-    }
-
-    public int getAmount() {
-        return amount;
-    }
-
-    public void setAmount(int amount) {
-        this.amount = amount;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(Long orderId) {
-        this.orderId = orderId;
-    }
 }

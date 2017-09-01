@@ -17,7 +17,7 @@ public class Order {
     private Date completeDate;
 
     @ManyToOne
-    @JoinColumn(name = "userId")
+    @JoinColumn(name = "ID")
     private User user;    //private Long userId
     private BigDecimal subTotal;
 
@@ -32,5 +32,55 @@ public class Order {
     public Order() {
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
+
+    public Date getCompleteDate() {
+        return completeDate;
+    }
+
+    public void setCompleteDate(Date completeDate) {
+        this.completeDate = completeDate;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public BigDecimal getSubTotal() {
+        return subTotal;
+    }
+
+    public void setSubTotal(BigDecimal subTotal) {
+        this.subTotal = subTotal;
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                ", createDate=" + createDate +
+                ", completeDate=" + completeDate +
+                ", user=" + user +
+                ", subTotal=" + subTotal +
+                '}';
+    }
 }
 

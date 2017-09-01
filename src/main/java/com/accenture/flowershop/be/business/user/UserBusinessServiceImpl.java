@@ -14,7 +14,7 @@ public class UserBusinessServiceImpl implements UserBusinessService {
     }
 
     @Override
-    public void updateUser(User user) {
-
+    public User updateUser(User user) {
+        return null;
     }
 }

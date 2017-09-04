@@ -90,9 +90,32 @@
                 <groupId>com.h2database</groupId>
                 <artifactId>h2</artifactId>
                 <version>1.4.196</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.h2database</groupId>
+                <artifactId>h2</artifactId>
+                <version>1.4.196</version>
                 <scope>test</scope>
             </dependency>
 
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>RELEASE</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.webjars</groupId>
+                <artifactId>bootstrap</artifactId>
+                <version>3.3.7</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.webjars</groupId>
+                <artifactId>jquery</artifactId>
+                <version>3.2.1</version>
+            </dependency>
 
         </dependencies>
 
@@ -120,7 +143,7 @@
                     <configuration>
                         <driver>org.h2.Driver</driver>
                         <user>sa</user>
-                        <url>jdbc:h2:mem:flowershop</url>
+                        <url>jdbc:h2:tcp://localhost/~/flowershop</url>
 
                     </configuration>
                 </plugin>

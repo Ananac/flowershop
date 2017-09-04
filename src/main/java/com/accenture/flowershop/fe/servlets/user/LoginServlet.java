@@ -12,9 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-
-@WebServlet(urlPatterns = "/register")
-public class RegisterServlet extends HttpServlet {
+@WebServlet(urlPatterns = "/login")
+public class LoginServlet extends HttpServlet {
     @Autowired
     UserBusinessService ubs;
 
@@ -24,25 +23,31 @@ public class RegisterServlet extends HttpServlet {
         SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this, config.getServletContext());
     }
 
+    @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-
         String username = request.getParameter("inputUsername");
         String password = request.getParameter("inputPassword");
-        String cpassword = request.getParameter("inputCPassword");
-        String fullName = request.getParameter("inputFullName");
-        String city = request.getParameter("inputCity");
-        String address = request.getParameter("inputAddress");
 
-        if ((!username.equals("")) && (!password.equals("")) && (!fullName.equals("")) && (!city.equals("")) &&
-                (!address.equals("")) && (password.equals(cpassword))) {
-            ubs.register(username, password, fullName, city, address);
-            response.sendRedirect("successPage.html");
-        } else {
-            response.sendRedirect("register.jsp");
+
+        try {
+            if (!username.equals("") || !password.equals("")) {
+                if (!ubs.login(username, password).equals(null)) {
+                    response.sendRedirect("successPage.html");
+                }
+            } else {
+                response.sendRedirect("login");
+            }
+
+        } catch (NullPointerException e) {
+            response.sendRedirect("login");
         }
+    }
 
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.getRequestDispatcher("login.jsp").forward(req, resp);
 
     }
 }

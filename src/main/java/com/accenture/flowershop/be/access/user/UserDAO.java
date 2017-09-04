@@ -8,7 +8,13 @@ import java.util.List;
 public interface UserDAO {
 
     User get(String username);
+
+    User getByUsername(String username);
+    @Transactional
+    User getByUsernameAndPassword(String username, String password);
+
     @Transactional
     User create(User user);
+
     void update(User user);
 }

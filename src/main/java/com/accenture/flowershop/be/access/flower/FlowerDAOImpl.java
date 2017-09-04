@@ -6,10 +6,11 @@ import org.springframework.stereotype.Component;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import java.math.BigDecimal;
 import java.util.List;
 
 @Component
-public class FlowerDAOImpl {
+public class FlowerDAOImpl implements FlowerDAO {
     @PersistenceContext
     private EntityManager em;
 
@@ -27,6 +28,20 @@ public class FlowerDAOImpl {
 
         return flower;
     }
+
+    @Override
+    public void updateQuantity(Long id, int quantity) {
+
+    }
+
+    public List<Flower> getByPriceRange(BigDecimal minPrice, BigDecimal maxPrice) {
+        TypedQuery<Flower> query = em.createQuery("select f from Flower f where f.price >= :minPrice and" +
+                "  f.price <= :maxPrice", Flower.class);
+        List<Flower> flowers = query.getResultList();
+
+        return flowers;
+    }
+
 
     public Flower update(Flower flower) {
         return null;

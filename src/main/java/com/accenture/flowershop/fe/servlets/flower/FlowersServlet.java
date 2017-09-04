@@ -23,10 +23,8 @@ import java.util.List;
             String result = "";
             List<Flower> flowers = dao.getFlowers();
             for (Flower flower : flowers) {
-                result += "<br/>" + flower.getId() + " " + flower.getName() + " " + flower.getPrice();
+                result += "<br/>" + flower.getId() + " " + flower.getName() + " " + flower.getPrice()+ " &#8381" ;
             }
-            result = "Flowers: " + result;
-
             resp.setContentType("text/html");
 
             resp.getWriter().print("<html><body><h2>" + result + "</h2></body></html>");

@@ -1,16 +1,26 @@
 package com.accenture.flowershop.be.business.user;
 
+import com.accenture.flowershop.be.access.user.UserDAO;
 import com.accenture.flowershop.be.entity.user.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+
+@Component
 public class UserBusinessServiceImpl implements UserBusinessService {
+    @Autowired
+    UserDAO dao;
+
     @Override
     public User login(String username, String password) {
         return null;
     }
 
     @Override
-    public User register(String username, String email, String password, String fullName, String address) {
-        return null;
+    public User register(String username,String password, String fullName, String city, String address) {
+        User u = new User(username, password, fullName, city, address);
+        dao.create(u);
+        return u;
     }
 
     @Override

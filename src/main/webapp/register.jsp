@@ -19,19 +19,24 @@
         var f = document.forms["Form"]["inputAddress"].value;
         var g = document.forms["Form"]["inputZipcode"].value;
         if (a == null || a == "") {
-            alert("Please fill username field");
+            alert("Please fill Username field");
             return false;
         }
         if (b == null || b == "") {
-            alert("Please fill password field");
+            alert("Please fill Password field");
             return false;
         }
         if (c == null || c == "") {
-            alert("Please fill Confirm Password field");
+            alert("Please fill Confirm password field");
             return false;
         }
+        if (b != c) {
+            alert("Passwords not equal");
+            return false;
+        }
+
         if (d == null || d == "") {
-            alert("Please fill Full Name field");
+            alert("Please fill Full name field");
             return false;
         }
         if (e == null || e == "") {
@@ -41,10 +46,7 @@
         if (f == null || f == "") {
             alert("Please fill Address field");
             return false;
-        }
-        if (b != c) {
-            alert("Passwords not equal");
-            return false;
+
         }
         if (g == null || g == "") {
             alert("Please fill Zip code field");

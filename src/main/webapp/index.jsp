@@ -14,9 +14,9 @@
     <img src="http://www.freeiconspng.com/uploads/red-flower-icon-18.png" width="200px">
     <h1>Flower Shop</h1>
     <br>
-    <a href="login.jsp" class="btn btn-primary" role="button">Sign in</a>
+    <a href="login" class="btn btn-primary">Sign in</a>
     <%--<br><br>--%>
-    <a href="register.jsp" class="btn btn-outline-primary">Sign up</a>
+    <a href="register" class="btn btn-outline-primary">Sign up</a>
 </div>
 
 

@@ -35,4 +35,11 @@ public class UserBusinessServiceImpl implements UserBusinessService {
     public User updateUser(User user) {
         return null;
     }
+
+    @Override
+    public User getInfo(String username) {
+        User u = dao.getByUsername(username);
+        return u;
+
+    }
 }

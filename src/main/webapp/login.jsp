@@ -54,7 +54,7 @@
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
                 <input type="submit" class="btn btn-large btn-primary"/> <br> <br>
-                <a href="register.jsp">Register</a>
+                <a href="register.jsp">Sign up</a>
             </div>
         </div>
     </form>

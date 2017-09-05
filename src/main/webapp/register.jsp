@@ -24,6 +24,7 @@
         var d = document.forms["Form"]["inputFullName"].value;
         var e = document.forms["Form"]["inputCity"].value;
         var f = document.forms["Form"]["inputAddress"].value;
+        var g = document.forms["Form"]["inputZipcode"].value;
         if (a == null || a == "") {
             alert("Please fill username field");
             return false;
@@ -52,6 +53,10 @@
             alert("Passwords not equal");
             return false;
         }
+        if (g== null || g == "") {
+            alert("Please fill Zip code field");
+            return false;
+        }
 
     }
 </script>
@@ -77,6 +82,9 @@
 
         <label for="inputCity">City</label>
         <input type="text" class="form-control" id="inputCity" name="inputCity" placeholder="City"><br/>
+
+        <label for="inputZipcode">Zip code</label>
+        <input type="number" class="form-control" id="inputZipcode" name="inputZipcode" placeholder="Zip code"><br/>
 
         <label for="inputAddress">Address</label>
         <input type="text" class="form-control" id="inputAddress" name="inputAddress" placeholder="Address"><br/>

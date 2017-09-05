@@ -12,8 +12,8 @@
 <div class="center hero-unit">
     <img src="http://www.freeiconspng.com/uploads/red-flower-icon-18.png" width="200px">
     <h1>Hi there</h1>
-    <a href="login.jsp">Login</a> <br>
-    <a href="register.jsp">Register</a>
+    <a href="login.jsp">Sign in</a> <br>
+    <a href="register.jsp">Sign up</a>
 </div>
 
 

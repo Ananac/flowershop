@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 @WebServlet(urlPatterns = "/login")
 public class LoginServlet extends HttpServlet {
@@ -26,22 +27,21 @@ public class LoginServlet extends HttpServlet {
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        PrintWriter out = response.getWriter();
 
         String username = request.getParameter("inputUsername");
         String password = request.getParameter("inputPassword");
 
 
         try {
-            if (!username.equals("") || !password.equals("")) {
-                if (!ubs.login(username, password).equals(null)) {
-                    response.sendRedirect("successPage.html");
-                }
-            } else {
-                response.sendRedirect("login");
-            }
+            ubs.login(username, password).equals(null);
+            response.sendRedirect("successPage.html");
 
         } catch (NullPointerException e) {
-            response.sendRedirect("login");
+            out.println("<script type=\"text/javascript\">");
+            out.println("alert('Username/password not correct');");
+            out.println("location='login.jsp';");
+            out.println("</script>");
         }
     }
 

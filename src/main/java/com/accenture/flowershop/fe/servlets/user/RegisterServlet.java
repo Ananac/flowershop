@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
+
+import static java.lang.Integer.parseInt;
 
 
 @WebServlet(urlPatterns = "/register")
@@ -27,22 +30,27 @@ public class RegisterServlet extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-
+        PrintWriter out = response.getWriter();
         String username = request.getParameter("inputUsername");
         String password = request.getParameter("inputPassword");
-        String cpassword = request.getParameter("inputCPassword");
+
         String fullName = request.getParameter("inputFullName");
         String city = request.getParameter("inputCity");
+        String zip = request.getParameter("inputZipcode");
+        int zipcode = parseInt(zip);
         String address = request.getParameter("inputAddress");
 
-        if ((!username.equals("")) && (!password.equals("")) && (!fullName.equals("")) && (!city.equals("")) &&
-                (!address.equals("")) && (password.equals(cpassword))) {
-            ubs.register(username, password, fullName, city, address);
+        try {
+            ubs.register(username, password, fullName, city, zipcode, address).equals(null);
             response.sendRedirect("successPage.html");
-        } else {
-            response.sendRedirect("register.jsp");
+
+        } catch (NullPointerException e) {
+            out.println("<script type=\"text/javascript\">");
+            out.println("alert('User already exsists');");
+            out.println("location='register.jsp';");
+            out.println("</script>");
+
         }
-
-
     }
 }
+

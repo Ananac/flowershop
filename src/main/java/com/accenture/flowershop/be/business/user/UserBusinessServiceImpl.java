@@ -21,14 +21,13 @@ public class UserBusinessServiceImpl implements UserBusinessService {
     }
 
     @Override
-    public User register(String username, String password, String fullName, String city, String address) {
-        User u = new User(username, password, fullName, city, address);
+    public User register(String username, String password, String fullName, String city, int zipcode, String address) {
+        User u = new User(username, password, fullName, city, zipcode, address);
 
-        if (dao.getByUsername(username) == null && !(username.equals(null)) && !(password.equals(null)) &&
-                !(fullName.equals(null)) && !(city.equals(null)) && !(address.equals(null))) {
-            dao.create(u);
-            return u;
-        }
+        if (dao.getByUsername(username) == null) {
+                dao.create(u);
+                return u;
+            }
         return null;
     }
 

@@ -27,7 +27,7 @@ public class User {
     private String city;
     @Getter
     @Setter
-    private String zipcode = "00000";
+    private int zipcode;
     @Getter
     @Setter
     private String address;
@@ -45,28 +45,13 @@ public class User {
 
     }
 
-    public User(String username, String password, String fullName, String city, String address) {
+    public User(String username, String password, String fullName, String city, int zipcode, String address) {
         this.username = username;
         this.password = password;
         this.fullName = fullName;
         this.city = city;
+        this.zipcode = zipcode;
         this.address = address;
     }
 
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", fullName='" + fullName + '\'' +
-                ", city='" + city + '\'' +
-                ", zipcode=" + zipcode +
-                ", address='" + address + '\'' +
-                ", balance=" + balance +
-                ", discount=" + discount +
-                ", isAdmin=" + isAdmin +
-                '}';
-    }
 }

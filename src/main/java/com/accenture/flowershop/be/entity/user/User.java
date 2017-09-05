@@ -27,13 +27,13 @@ public class User {
     private String city;
     @Getter
     @Setter
-    private String zipcode = "00000";
+    private int zipcode;
     @Getter
     @Setter
     private String address;
     @Getter
     @Setter
-    private BigDecimal balance =  new BigDecimal(500);
+    private BigDecimal balance = new BigDecimal(500);
     @Getter
     @Setter
     private int discount = 0;
@@ -45,14 +45,14 @@ public class User {
 
     }
 
-    public User(String username, String password, String fullName, String city, String address) {
+    public User(String username, String password, String fullName, String city, int zipcode, String address) {
         this.username = username;
         this.password = password;
         this.fullName = fullName;
         this.city = city;
+        this.zipcode = zipcode;
         this.address = address;
     }
-
 
     @Override
     public String toString() {

@@ -1,29 +1,16 @@
-
 body {
     padding-top: 10px;
     padding-left: 20px;
-
-    text-align: -webkit-center;
-}
-
-
-
-form.form-horizontal{
-    width: 600px;
-    text-align: center;
-    margin: 40px;
-}
-
-div.form-group{
-    text-align: center;
-}
-
-div.inp {
-    width: 400px;
-    text-align: center;
 }
 
 form {
     width: 400px;
 }
 
+.center {
+    text-align: -webkit-center;
+}
+
+hr {
+
+}

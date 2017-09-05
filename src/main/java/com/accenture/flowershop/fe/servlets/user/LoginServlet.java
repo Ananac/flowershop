@@ -13,11 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import static java.lang.Integer.parseInt;
-
-
-@WebServlet(urlPatterns = "/register")
-public class RegisterServlet extends HttpServlet {
+@WebServlet(urlPatterns = "/login")
+public class LoginServlet extends HttpServlet {
     @Autowired
     UserBusinessService ubs;
 
@@ -27,6 +24,7 @@ public class RegisterServlet extends HttpServlet {
         SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this, config.getServletContext());
     }
 
+    @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
@@ -34,28 +32,23 @@ public class RegisterServlet extends HttpServlet {
 
         String username = request.getParameter("inputUsername");
         String password = request.getParameter("inputPassword");
-        String fullName = request.getParameter("inputFullName");
-        String city = request.getParameter("inputCity");
 
-        String zip = request.getParameter("inputZipcode");
-        int zipcode = parseInt(zip);
-
-        String address = request.getParameter("inputAddress");
 
         try {
-            ubs.register(username, password, fullName, city, zipcode, address).equals(null);
-            out.println("<script type=\"text/javascript\">");
-            out.println("alert('Successfully registered');");
-            out.println("location='login.jsp';");
-            out.println("</script>");
+            ubs.login(username, password).equals(null);
+            response.sendRedirect("successPage.html");
 
         } catch (NullPointerException e) {
             out.println("<script type=\"text/javascript\">");
-            out.println("alert('Username already exists');");
-            out.println("location='register.jsp';");
+            out.println("alert('Incorrect username or password');");
+            out.println("location='login.jsp';");
             out.println("</script>");
-
         }
     }
-}
 
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.getRequestDispatcher("login.jsp").forward(req, resp);
+
+    }
+}

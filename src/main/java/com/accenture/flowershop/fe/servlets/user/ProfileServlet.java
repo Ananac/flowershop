@@ -1,6 +1,7 @@
 package com.accenture.flowershop.fe.servlets.user;
 
 import com.accenture.flowershop.be.business.user.UserBusinessService;
+import com.accenture.flowershop.be.entity.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
@@ -34,8 +35,12 @@ public class ProfileServlet extends HttpServlet {
         try {
             HttpSession session = req.getSession(false);
             String username = session.getAttribute("un").toString();
-    //        out.println(ubs.getInfo(username).toString());
-            req.setAttribute("todo", ubs.getInfo(username).toString());
+            User u = ubs.getInfo(username);
+            req.setAttribute("un",  u.getUsername());
+            req.setAttribute("bal",  u.getBalance());
+            req.setAttribute("disc",  u.getDiscount());
+
+
             req.getRequestDispatcher("/profile.jsp").forward(req, resp);
         } catch (NullPointerException e) {
             return;

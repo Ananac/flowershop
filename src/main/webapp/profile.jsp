@@ -1,10 +1,4 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: denis.bazylev
-  Date: 05.09.2017
-  Time: 13:36
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="java.math.BigDecimal" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -17,11 +11,16 @@
 </head>
 <body>
 <a href="index.jsp">
-    <img class="check" src="https://icon-icons.com/icons2/894/PNG/512/Tick_Mark_icon-icons.com_69146.png">
+    <img class="check" src="http://www.freeiconspng.com/uploads/red-flower-icon-18.png" width="200px">
 </a>
+
 <br>
-<label>
-    <%=(String) request.getAttribute("todo")%>
-</label>
+<label>Hello, <%=(String) request.getAttribute("un")%></label><br>
+<label>Your balance: <%=(BigDecimal) request.getAttribute("bal")%></label><br>
+<label>Your discount: <%=(Integer) request.getAttribute("disc")%></label>
+
+<form action="logout" method="post">
+    <input type="submit" value="Logout" class="btn btn-danger"/>
+</form>
 </body>
 </html>

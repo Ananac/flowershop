@@ -4,6 +4,7 @@ import com.accenture.flowershop.be.entity.flower.Flower;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import java.math.BigDecimal;
@@ -15,10 +16,14 @@ public class FlowerDAOImpl implements FlowerDAO {
     private EntityManager em;
 
     public List<Flower> getFlowers() {
-        TypedQuery<Flower> query = em.createQuery("select f from Flower f", Flower.class);
-        List<Flower> flowers = query.getResultList();
-
-        return flowers;
+        List<Flower> flowers = null;
+        try {
+            TypedQuery<Flower> query = em.createQuery("select f from Flower f", Flower.class);
+            flowers = query.getResultList();
+            return flowers;
+        } catch (NoResultException ex) {
+            return null;
+        }
     }
 
     public Flower getByName(String name) {

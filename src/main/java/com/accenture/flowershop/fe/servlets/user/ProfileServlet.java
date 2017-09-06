@@ -35,6 +35,7 @@ public class ProfileServlet extends HttpServlet {
         try {
             HttpSession session = req.getSession(false);
             String username = session.getAttribute("un").toString();
+
             User u = ubs.getInfo(username);
             req.setAttribute("un",  u.getUsername());
             req.setAttribute("bal",  u.getBalance());

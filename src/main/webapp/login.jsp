@@ -1,3 +1,4 @@
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -46,7 +47,7 @@
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-                <input type="submit" class="btn btn-large btn-primary"/> <br> <hr>
+                <input type="submit" class="btn btn-large btn-danger"/> <br> <hr>
                 <a href="register">Sign up</a>
             </div>
         </div>

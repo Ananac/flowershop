@@ -1,11 +1,9 @@
 package com.accenture.flowershop.fe.servlets.user;
 
 import com.accenture.flowershop.be.business.user.UserBusinessService;
-import com.accenture.flowershop.be.entity.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -36,14 +34,19 @@ public class LoginServlet extends HttpServlet {
         String username = request.getParameter("inputUsername");
         String password = request.getParameter("inputPassword");
 
-
-
-
         try {
             ubs.login(username, password).equals(null);
             HttpSession session = request.getSession();
             session.setAttribute("un", username);
-            response.sendRedirect("profile");
+
+            if (!ubs.getInfo(username).isAdmin()) {
+                response.sendRedirect("profile");
+            } else {
+
+                //TODO adminpage.jsp -> adminpage
+                response.sendRedirect("adminpage.jsp");
+            }
+
 
         } catch (NullPointerException e) {
             out.println("<script type=\"text/javascript\">");

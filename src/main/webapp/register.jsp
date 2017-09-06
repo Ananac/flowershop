@@ -1,3 +1,4 @@
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -85,7 +86,7 @@
         <label for="inputAddress">Address</label>
         <input type="text" class="form-control" id="inputAddress" name="inputAddress" placeholder="Address"><br/>
         <hr>
-        <input type="submit" class="btn btn-large btn-primary"/>
+        <input type="submit" class="btn btn-large btn-danger"/>
     </form>
 </div>
 </body>

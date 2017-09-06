@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,9 +15,9 @@
     <img src="http://www.freeiconspng.com/uploads/red-flower-icon-18.png" width="200px">
     <h1>Flower Shop</h1>
     <br>
-    <a href="login" class="btn btn-primary">Sign in</a>
+    <a href="login" class="btn btn-large btn-danger">Sign in</a>
     <%--<br><br>--%>
-    <a href="register" class="btn btn-outline-primary">Sign up</a>
+    <a href="register" class="btn btn-large btn-outline-danger">Sign up</a>
 </div>
 
 

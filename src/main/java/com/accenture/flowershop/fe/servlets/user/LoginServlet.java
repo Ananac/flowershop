@@ -1,6 +1,7 @@
 package com.accenture.flowershop.fe.servlets.user;
 
 import com.accenture.flowershop.be.business.user.UserBusinessService;
+import com.accenture.flowershop.be.entity.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
@@ -10,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -32,13 +34,21 @@ public class LoginServlet extends HttpServlet {
 
         String username = request.getParameter("inputUsername");
         String password = request.getParameter("inputPassword");
+        User u = ubs.login(username,password);
 
-
-        try {
-            ubs.login(username, password).equals(null);
-            response.sendRedirect("successPage.html");
-
-        } catch (NullPointerException e) {
+        if (u != null) {
+            HttpSession session = request.getSession();
+            session.setAttribute("un", username);
+            session.setAttribute("bal", u.getBalance());
+            session.setAttribute("disc", u.getDiscount());
+            session.setAttribute("total", 0);
+            if (!ubs.getInfo(username).isAdmin()) {
+                response.sendRedirect("profile");
+            } else {
+                //TODO orders.jsp -> orders
+                response.sendRedirect("orders.jsp");
+            }
+        } else {
             out.println("<script type=\"text/javascript\">");
             out.println("alert('Incorrect username or password');");
             out.println("location='login.jsp';");

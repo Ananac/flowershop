@@ -4,6 +4,7 @@ import com.accenture.flowershop.be.entity.flower.Flower;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import java.math.BigDecimal;
@@ -15,10 +16,14 @@ public class FlowerDAOImpl implements FlowerDAO {
     private EntityManager em;
 
     public List<Flower> getFlowers() {
-        TypedQuery<Flower> query = em.createQuery("select f from Flower f", Flower.class);
-        List<Flower> flowers = query.getResultList();
-
-        return flowers;
+        List<Flower> flowers = null;
+        try {
+            TypedQuery<Flower> query = em.createQuery("select f from Flower f", Flower.class);
+            flowers = query.getResultList();
+            return flowers;
+        } catch (NoResultException ex) {
+            return null;
+        }
     }
 
     public Flower getByName(String name) {
@@ -29,10 +34,10 @@ public class FlowerDAOImpl implements FlowerDAO {
         return flower;
     }
 
-    @Override
     public void updateQuantity(Long id, int quantity) {
 
     }
+
 
     public List<Flower> getByPriceRange(BigDecimal minPrice, BigDecimal maxPrice) {
         TypedQuery<Flower> query = em.createQuery("select f from Flower f where f.price >= :minPrice and" +

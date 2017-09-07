@@ -1,3 +1,4 @@
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -19,19 +20,24 @@
         var f = document.forms["Form"]["inputAddress"].value;
         var g = document.forms["Form"]["inputZipcode"].value;
         if (a == null || a == "") {
-            alert("Please fill username field");
+            alert("Please fill Username field");
             return false;
         }
         if (b == null || b == "") {
-            alert("Please fill password field");
+            alert("Please fill Password field");
             return false;
         }
         if (c == null || c == "") {
-            alert("Please fill Confirm Password field");
+            alert("Please fill Confirm password field");
             return false;
         }
+        if (b != c) {
+            alert("Passwords not equal");
+            return false;
+        }
+
         if (d == null || d == "") {
-            alert("Please fill Full Name field");
+            alert("Please fill Full name field");
             return false;
         }
         if (e == null || e == "") {
@@ -41,10 +47,7 @@
         if (f == null || f == "") {
             alert("Please fill Address field");
             return false;
-        }
-        if (b != c) {
-            alert("Passwords not equal");
-            return false;
+
         }
         if (g == null || g == "") {
             alert("Please fill Zip code field");
@@ -57,7 +60,7 @@
 
 <body>
 <div class="center hero-unit">
-    <form method="post" name="Form" onsubmit="return validateForm()" action="register"><br/>
+    <form method="post" name="Auth" id="Auth" onsubmit="return validateForm()" action="register">
 
         <label for="inputUsername">Username</label>
         <input type="text" class="form-control" id="inputUsername" name="inputUsername" placeholder="Username"><br/>
@@ -83,7 +86,7 @@
         <label for="inputAddress">Address</label>
         <input type="text" class="form-control" id="inputAddress" name="inputAddress" placeholder="Address"><br/>
         <hr>
-        <input type="submit" class="btn btn-large btn-primary"/>
+        <input type="submit" class="btn btn-large btn-danger"/>
     </form>
 </div>
 </body>

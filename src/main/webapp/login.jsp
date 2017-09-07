@@ -1,3 +1,4 @@
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -26,8 +27,9 @@
 
 
 <body>
+
 <div class="center hero-unit">
-    <form class="form-horizontal" name="Form" method="post" onsubmit="return validateForm()" action="login">
+    <form class="form-horizontal" name="Auth" id="Auth" method="post" onsubmit="return validateForm()" action="login">
         <div class="form-group">
             <label for="inputUsername">Username</label>
             <div class="col-sm-10">
@@ -46,8 +48,8 @@
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-                <input type="submit" class="btn btn-large btn-primary"/> <br> <hr>
-                <a href="register.jsp">Sign up</a>
+                <input type="submit" class="btn btn-large btn-danger"/> <br> <hr>
+                <a href="register">Sign up</a>
             </div>
         </div>
 

@@ -46,16 +46,23 @@ public class RegisterServlet extends HttpServlet {
             ubs.register(username, password, fullName, city, zipcode, address).equals(null);
             out.println("<script type=\"text/javascript\">");
             out.println("alert('Successfully registered');");
-            out.println("location='login.jsp';");
+            out.println("location='login';");
             out.println("</script>");
 
         } catch (NullPointerException e) {
             out.println("<script type=\"text/javascript\">");
             out.println("alert('Username already exists');");
-            out.println("location='register.jsp';");
+            out.println("location='register';");
             out.println("</script>");
 
         }
+    }
+
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.getRequestDispatcher("register.jsp").forward(req, resp);
+
     }
 }
 

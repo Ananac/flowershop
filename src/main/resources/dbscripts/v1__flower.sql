@@ -1,7 +1,7 @@
 CREATE TABLE IF NOT EXISTS  FLOWER (
   id          IDENTITY    NOT NULL,
   name        VARCHAR(50) NOT NULL,
-  price       DOUBLE      NOT NULL,
+  price       DECIMAL      NOT NULL,
   quantity    INT         NOT NULL
 );
 

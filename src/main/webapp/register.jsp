@@ -60,7 +60,7 @@
 
 <body>
 <div class="center hero-unit">
-    <form method="post" name="Form" onsubmit="return validateForm()" action="register"><br/>
+    <form method="post" name="Auth" id="Auth" onsubmit="return validateForm()" action="register">
 
         <label for="inputUsername">Username</label>
         <input type="text" class="form-control" id="inputUsername" name="inputUsername" placeholder="Username"><br/>

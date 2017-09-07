@@ -27,8 +27,9 @@
 
 
 <body>
+
 <div class="center hero-unit">
-    <form class="form-horizontal" name="Form" method="post" onsubmit="return validateForm()" action="login">
+    <form class="form-horizontal" name="Auth" id="Auth" method="post" onsubmit="return validateForm()" action="login">
         <div class="form-group">
             <label for="inputUsername">Username</label>
             <div class="col-sm-10">

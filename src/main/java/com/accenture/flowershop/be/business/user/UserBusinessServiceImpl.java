@@ -11,7 +11,7 @@ public class UserBusinessServiceImpl implements UserBusinessService {
     @Autowired
     UserDAO dao;
 
-    @Override
+
     public User login(String username, String password) {
 
         if (dao.getByUsernameAndPassword(username, password) != null) {
@@ -20,7 +20,7 @@ public class UserBusinessServiceImpl implements UserBusinessService {
         return null;
     }
 
-    @Override
+
     public User register(String username, String password, String fullName, String city, int zipcode, String address) {
         User u = new User(username, password, fullName, city, zipcode, address);
 
@@ -31,12 +31,12 @@ public class UserBusinessServiceImpl implements UserBusinessService {
         return null;
     }
 
-    @Override
+
     public User updateUser(User user) {
         return null;
     }
 
-    @Override
+
     public User getInfo(String username) {
         User u = dao.getByUsername(username);
         return u;

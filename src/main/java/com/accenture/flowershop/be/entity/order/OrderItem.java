@@ -1,58 +1,47 @@
 package com.accenture.flowershop.be.entity.order;
 
 import com.accenture.flowershop.be.entity.flower.Flower;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 @Entity
 public class OrderItem {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_cust")
-    @SequenceGenerator(name = "seq_cust", sequenceName = "seq_cust", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Getter
+    @Setter
     private Long id;
 
     @ManyToOne
     @JoinColumn(name = "ORDERID")
+    @Getter
+    @Setter
     private Order order;    //private Long orderId;
 
     @ManyToOne
     @JoinColumn(name = "FLOWERID")
+    @Getter
+    @Setter
     private Flower flower;  //private Long flowerId;
 
+    @Getter
+    @Setter
     private int amount;
 
-    public OrderItem() { }
+    @Getter
+    @Setter
+    private BigDecimal cost;
 
-    public Long getId() {
-        return id;
+    public OrderItem() {
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Order getOrder() {
-        return order;
-    }
-
-    public void setOrder(Order order) {
-        this.order = order;
-    }
-
-    public Flower getFlower() {
-        return flower;
-    }
-
-    public void setFlower(Flower flower) {
+    public OrderItem(Flower flower, int amount) {
         this.flower = flower;
-    }
-
-    public int getAmount() {
-        return amount;
-    }
-
-    public void setAmount(int amount) {
         this.amount = amount;
+        cost = flower.getPrice().multiply(new BigDecimal(amount));
     }
 
     @Override

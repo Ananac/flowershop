@@ -34,10 +34,10 @@ public class FlowerDAOImpl implements FlowerDAO {
         return flower;
     }
 
-    @Override
     public void updateQuantity(Long id, int quantity) {
 
     }
+
 
     public List<Flower> getByPriceRange(BigDecimal minPrice, BigDecimal maxPrice) {
         TypedQuery<Flower> query = em.createQuery("select f from Flower f where f.price >= :minPrice and" +

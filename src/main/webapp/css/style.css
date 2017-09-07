@@ -1,16 +1,51 @@
 body {
-    padding-top: 10px;
-    padding-left: 20px;
+    padding: 20px;
 }
 
-form {
+#Auth {
     width: 400px;
+}
+
+#flowers {
+    width: 500px;
+}
+
+#orders {
+   width: 600px
+}
+
+form#order {
+    text-align: center;
+    width: 500px;
+}
+
+#cart {
+    text-align: center;
+    width: 400px;
+    border: 4px double #c11818;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+h2 {
+    font-weight: bolder;
+}
+
+label {
+    font-weight: bolder;
+    font-size: initial;
+}
+
+#total {
+    text-align: right;
 }
 
 .center {
     text-align: -webkit-center;
 }
 
-hr {
-
+table, th, td {
+    border: 1px solid #c11818;
+    padding: 10px;
+    text-align: center;
 }

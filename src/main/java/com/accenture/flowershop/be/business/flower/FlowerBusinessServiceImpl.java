@@ -12,29 +12,28 @@ public class FlowerBusinessServiceImpl implements FlowerBusinessService {
     @Autowired
     FlowerDAO dao;
 
-    @Override
+
     public boolean checkAvailability(String name, int amount) {
         return false;
     }
 
-    @Override
     public Flower getFlower(String name) {
         return null;
     }
 
-    @Override
+
     public List<Flower> flowersList() {
         List<Flower> l = dao.getFlowers();
         return l;
     }
 
 
-    @Override
+
     public List<Flower> getFlowerByPriceRange(BigDecimal minPrice, BigDecimal maxPrice) {
         return null;
     }
 
-    @Override
+
     public void updateFlowersQuantity(Long id, int quantity) {
 
     }

@@ -9,11 +9,13 @@ public interface UserDAO {
 
     User getByUsername(String username);
 
+
     @Transactional
     User getByUsernameAndPassword(String username, String password);
 
     @Transactional
     User create(User user);
 
-    void update(User user);
+    @Transactional
+    User update(User user);
 }

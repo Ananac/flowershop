@@ -5,6 +5,8 @@ import com.accenture.flowershop.be.entity.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
+
 
 @Component
 public class UserBusinessServiceImpl implements UserBusinessService {
@@ -32,8 +34,12 @@ public class UserBusinessServiceImpl implements UserBusinessService {
     }
 
 
-    public User updateUser(User user) {
-        return null;
+    public User updateBalance(String username, BigDecimal total) {
+        User u = dao.getByUsername(username);
+        BigDecimal oldBalance = u.getBalance();
+        u.setBalance(oldBalance.subtract(total));
+        dao.update(u);
+        return u;
     }
 
 

@@ -14,7 +14,7 @@ public interface OrderBusinessService {
     Order newOrder(User user, BigDecimal subTotal);
     @Transactional
     List<Order> getAllOrders();
-    void updateStatus(Order order);
+    void completeOrder(Long id);
     void deleteOrder(Order order);
     List<Order> getOrdersByUser(User user);
 }

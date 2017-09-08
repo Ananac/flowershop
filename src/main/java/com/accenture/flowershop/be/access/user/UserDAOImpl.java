@@ -52,7 +52,11 @@ public class UserDAOImpl implements UserDAO {
     }
 
 
-    public void update(User user) {
-
+    public User update(User user) {
+        try {
+            return em.merge(user);
+        } catch (NoResultException ex) {
+            return null;
+        }
     }
 }

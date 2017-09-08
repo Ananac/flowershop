@@ -32,14 +32,17 @@
                     <td>${iter.completeDate}</td>
                     <td>${iter.subTotal}</td>
                     <td>${iter.status}</td>
-                    <td width="20%"><input type="button" class="form-control" id="amount" name="amount" value="Close">
+                    <td width="20%">
+                        <form action="orders" method="post" onsubmit="return CheckClose()">
+                            <input type="submit" class="btn btn-large btn-danger" id="${iter.id}" name="close${iter.id}"
+                                   value="Close">
+                        </form>
                     </td>
                 </tr>
             </c:forEach>
         </table>
     </form>
 </div>
-
 </body>
 </html>
 

@@ -1,6 +1,7 @@
 package com.accenture.flowershop.fe.servlets.order;
 
 import com.accenture.flowershop.be.business.order.OrderBusinessService;
+import com.accenture.flowershop.be.business.user.UserBusinessService;
 import com.accenture.flowershop.be.entity.order.Order;
 import com.accenture.flowershop.be.entity.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,7 @@ import java.util.List;
 public class OrderServlet extends HttpServlet {
     @Autowired
     OrderBusinessService obs;
+    UserBusinessService ubs;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
@@ -49,6 +51,8 @@ public class OrderServlet extends HttpServlet {
         User u = (User) session.getAttribute("u");
         BigDecimal total = (BigDecimal) session.getAttribute("total");
         obs.newOrder(u, total);
+     //   ubs.updateBalance(u.getUsername(), total);
+
         List<Order> orderslist = obs.getOrdersByUser(u);
 
         session.setAttribute("order", orderslist);

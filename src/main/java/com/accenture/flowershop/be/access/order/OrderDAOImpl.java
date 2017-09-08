@@ -38,10 +38,24 @@ public class OrderDAOImpl implements OrderDAO {
     }
 
 
-    public void update(Order order) {
-
+    public Order update(Order order) {
+        try {
+            return em.merge(order);
+        } catch (NoResultException ex) {
+            return null;
+        }
     }
 
+    public Order getById(Long id) {
+        try {
+            TypedQuery<Order> query = em.createQuery("select o from Order o where o.id=:id", Order.class);
+            query.setParameter("id", id);
+            Order order = query.getSingleResult();
+            return order;
+        } catch (NoResultException ex) {
+            return null;
+        }
+    }
 
     public void delete(Long id) {
 

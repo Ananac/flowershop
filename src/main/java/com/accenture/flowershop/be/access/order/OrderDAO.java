@@ -14,7 +14,11 @@ public interface OrderDAO {
     @Transactional
     Order create(Order order);
 
-    void update(Order order);
+    @Transactional
+    Order update(Order order);
+
+    @Transactional
+    Order getById(Long id);
 
     void delete(Long id);
 

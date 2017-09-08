@@ -64,7 +64,7 @@ public class Order {
                 '}';
     }
 
-    private enum status {
+    public enum status {
         AWAITING_PAYMENT,
         PROCESSING,
         SHIPPED,

@@ -19,9 +19,7 @@
         <h2>Hello, ${un}</h2>
         <a href="flowers"><img class="check" src="http://www.freeiconspng.com/uploads/red-flower-icon-18.png"
                                width="200px"></a><br><br>
-        <form action="logout" method="post" id="logout">
-            <input type="submit" value="Logout" class="btn btn-danger"/>
-        </form>
+
 
     </div>
 
@@ -80,7 +78,12 @@
                 <h4>Balance: <%= request.getSession(false).getAttribute("bal")%> &#8381;</h4>
             </div>
             <br>
-
+            <form action="order">
+                <input type="submit" value="Orders" class="btn btn-outline-danger"/>
+            </form>
+            <form action="logout" method="post" id="logout">
+                <input type="submit" value="Logout" class="btn btn-danger"/>
+            </form>
         </div>
     </div>
 </div>

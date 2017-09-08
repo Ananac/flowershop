@@ -1,7 +1,9 @@
 package com.accenture.flowershop.fe.servlets.order;
 
 import com.accenture.flowershop.be.business.order.OrderBusinessService;
+import com.accenture.flowershop.be.entity.flower.Flower;
 import com.accenture.flowershop.be.entity.order.Order;
+import com.accenture.flowershop.be.entity.order.OrderItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
@@ -39,8 +41,15 @@ public class AdminServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        List<Order> orders = obs.getAllOrders();
 
-        req.getRequestDispatcher("/orders.jsp").forward(req, resp);
+        for (Order order : orders) {
+            String isPushed = req.getParameter("close" + order.getId());
+            if (isPushed != null) {
+                obs.completeOrder(order.getId());
+                resp.sendRedirect("orders");
+            }
+        }
 
     }
 }

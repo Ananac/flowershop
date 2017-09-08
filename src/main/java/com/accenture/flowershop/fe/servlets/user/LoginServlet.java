@@ -50,8 +50,7 @@ public class LoginServlet extends HttpServlet {
             if (!ubs.getInfo(username).isAdmin()) {
                 response.sendRedirect("profile");
             } else {
-                //TODO orders.jsp -> orders
-                response.sendRedirect("orders.jsp");
+                response.sendRedirect("orders");
             }
         } else {
             out.println("<script type=\"text/javascript\">");

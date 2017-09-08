@@ -1,13 +1,13 @@
-CREATE TABLE IF NOT EXISTS  "ORDER" (
-  id           IDENTITY           NOT NULL,
-  userid       BIGINT             NOT NULL,
-  createdate   TIMESTAMP          NOT NULL,
+CREATE TABLE IF NOT EXISTS "ORDER" (
+  id           IDENTITY,
+  userid       BIGINT,
+  createdate   TIMESTAMP,
   completedate TIMESTAMP,
-  subtotal     DECIMAL            NOT NULL,
+  subtotal     DECIMAL,
   status       ENUM ('AWAITING_PAYMENT',
                      'PROCESSING',
                      'SHIPPED',
                      'DELIVERED',
-                     'COMPLETED') NOT NULL,
+                     'COMPLETED'),
   FOREIGN KEY (userid) REFERENCES USER (id)
 );

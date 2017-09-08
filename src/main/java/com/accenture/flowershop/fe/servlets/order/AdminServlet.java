@@ -2,7 +2,6 @@ package com.accenture.flowershop.fe.servlets.order;
 
 import com.accenture.flowershop.be.business.order.OrderBusinessService;
 import com.accenture.flowershop.be.entity.order.Order;
-import com.accenture.flowershop.be.entity.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
@@ -14,13 +13,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.math.BigDecimal;
 import java.util.List;
 
-@WebServlet(urlPatterns = "/order")
-
-public class OrderServlet extends HttpServlet {
+@WebServlet(urlPatterns = "/orders")
+public class AdminServlet extends HttpServlet {
     @Autowired
     OrderBusinessService obs;
 
@@ -33,33 +29,19 @@ public class OrderServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession(false);
-        User u = (User) session.getAttribute("u");
 
-        List<Order> orderslist = obs.getOrdersByUser(u);
+        List<Order> orderslist = obs.getAllOrders();
         session.setAttribute("order", orderslist);
 
-        req.getRequestDispatcher("/order.jsp").forward(req, resp);
+        req.getRequestDispatcher("/orders.jsp").forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        HttpSession session = req.getSession(false);
 
-        User u = (User) session.getAttribute("u");
-        BigDecimal total = (BigDecimal) session.getAttribute("total");
-        obs.newOrder(u, total);
-        List<Order> orderslist = obs.getOrdersByUser(u);
-
-        session.setAttribute("order", orderslist);
-
-        session.setAttribute("total", 0);
-        session.setAttribute("disct", 0);
-        session.removeAttribute("c");
-
-        req.getRequestDispatcher("/order.jsp").forward(req, resp);
+        req.getRequestDispatcher("/orders.jsp").forward(req, resp);
 
     }
 }
-
 

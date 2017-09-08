@@ -37,13 +37,13 @@ public class ProfileServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         HttpSession session = req.getSession(false);
-
-        String username = session.getAttribute("un").toString();
-
-        User u = ubs.getInfo(username);
-        req.setAttribute("un", u.getUsername());
-        req.setAttribute("bal", u.getBalance());
-        req.setAttribute("disc", u.getDiscount());
+        session.setAttribute("total", 0);
+        session.setAttribute("disct", 0);
+//        String username = session.getAttribute("un").toString();//
+//        User u = ubs.getInfo(username);
+//        req.setAttribute("un", u.getUsername());
+//        req.setAttribute("bal", u.getBalance());
+//        req.setAttribute("disc", u.getDiscount());
 
         List<OrderItem> cart = (List<OrderItem>) session.getAttribute("cart");
         session.setAttribute("c", cart);

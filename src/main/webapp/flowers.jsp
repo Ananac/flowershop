@@ -14,8 +14,9 @@
 </head>
 
 <body>
+<a href="profile">
 <div class="center"><label>Flowers</label><img src="http://www.freeiconspng.com/uploads/red-flower-icon-18.png"
-                                               width="30px"></div>
+                                               width="30px"></div></a>
 <hr>
 <div class="center">
     <form id="flowers" action="flowers" method="post" onsubmit="return GetCellValues()">

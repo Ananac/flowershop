@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -10,7 +11,7 @@
 </head>
 <body>
 <div class="center">
-    <form id="order">
+    <form id="order" action="orders" method="post">
         <table class="table" id="orders">
             <thead bgcolor="#dc3545">
             <tr>
@@ -23,15 +24,18 @@
                 <th>Close order</th>
             </tr>
             </thead>
-            <%--<c:forEach items="${f}" var="iter" varStatus="rowStatus">--%>
-            <%--<tr>--%>
-            <%--<td>${iter.name}</td>--%>
-            <%--<td>${iter.price} &#8381;</td>--%>
-            <%--<td>${iter.quantity}</td>--%>
-            <%--<td width="20%"><input type="number" class="form-control" id="amount" name="amount" placeholder="0">--%>
-            <%--</td>--%>
-            <%--</tr>--%>
-            <%--</c:forEach>--%>
+            <c:forEach items="${order}" var="iter" varStatus="rowStatus">
+                <tr>
+                    <td>${iter.id}</td>
+                    <td>${iter.user.username}</td>
+                    <td>${iter.createDate}</td>
+                    <td>${iter.completeDate}</td>
+                    <td>${iter.subTotal}</td>
+                    <td>${iter.status}</td>
+                    <td width="20%"><input type="button" class="form-control" id="amount" name="amount" value="Close">
+                    </td>
+                </tr>
+            </c:forEach>
         </table>
     </form>
 </div>

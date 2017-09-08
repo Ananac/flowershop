@@ -38,10 +38,15 @@ public class LoginServlet extends HttpServlet {
 
         if (u != null) {
             HttpSession session = request.getSession();
+            session.setAttribute("u", u);
             session.setAttribute("un", username);
             session.setAttribute("bal", u.getBalance());
             session.setAttribute("disc", u.getDiscount());
-            session.setAttribute("total", 0);
+
+            session.setAttribute("fullname", u.getFullName());
+            session.setAttribute("city", u.getCity());
+            session.setAttribute("zipcode", u.getZipcode());
+            session.setAttribute("address", u.getAddress());
             if (!ubs.getInfo(username).isAdmin()) {
                 response.sendRedirect("profile");
             } else {

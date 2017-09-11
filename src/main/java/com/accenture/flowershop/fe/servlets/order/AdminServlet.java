@@ -1,8 +1,9 @@
-package com.accenture.flowershop.fe.servlets.user;
+package com.accenture.flowershop.fe.servlets.order;
 
-import com.accenture.flowershop.be.business.user.UserBusinessService;
+import com.accenture.flowershop.be.business.order.OrderBusinessService;
+import com.accenture.flowershop.be.entity.flower.Flower;
+import com.accenture.flowershop.be.entity.order.Order;
 import com.accenture.flowershop.be.entity.order.OrderItem;
-import com.accenture.flowershop.be.entity.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
@@ -14,13 +15,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 
-@WebServlet(urlPatterns = "/profile")
-public class ProfileServlet extends HttpServlet {
+@WebServlet(urlPatterns = "/orders")
+public class AdminServlet extends HttpServlet {
     @Autowired
-    UserBusinessService ubs;
+    OrderBusinessService obs;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
@@ -28,28 +28,29 @@ public class ProfileServlet extends HttpServlet {
         SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this, config.getServletContext());
     }
 
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-            req.getRequestDispatcher("/profile.jsp").forward(req, resp);
+        HttpSession session = req.getSession(false);
+
+        List<Order> orderslist = obs.getAllOrders();
+        session.setAttribute("order", orderslist);
+
+        req.getRequestDispatcher("/orders.jsp").forward(req, resp);
     }
 
+    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        HttpSession session = req.getSession(false);
-        session.setAttribute("total", 0);
-        session.setAttribute("disct", 0);
-//        String username = session.getAttribute("un").toString();//
-//        User u = ubs.getInfo(username);
-//        req.setAttribute("un", u.getUsername());
-//        req.setAttribute("bal", u.getBalance());
-//        req.setAttribute("disc", u.getDiscount());
+        List<Order> orders = obs.getAllOrders();
 
-        List<OrderItem> cart = (List<OrderItem>) session.getAttribute("cart");
-        session.setAttribute("c", cart);
-        req.getRequestDispatcher("/profile.jsp").forward(req, resp);
-
+        for (Order order : orders) {
+            String isPushed = req.getParameter("close" + order.getId());
+            if (isPushed != null) {
+                obs.completeOrder(order.getId());
+                resp.sendRedirect("orders");
+            }
+        }
 
     }
-
 }
+

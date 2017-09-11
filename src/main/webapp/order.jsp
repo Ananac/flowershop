@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>Order</title>
@@ -9,29 +10,33 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+<a href="profile"><div><img src="http://www.iconsdb.com/icons/preview/black/arrow-92-xxl.png" width="50px"></div></a>
+
 <div class="center">
-    <form id="order">
+    <form id="order" action="order" method="post">
         <table class="table" id="fl">
             <thead bgcolor="#dc3545">
             <tr>
                 <th>ID</th>
+                <th>Username</th>
                 <th>Create Date</th>
                 <th>Complete Date</th>
                 <th>Total</th>
                 <th>Status</th>
             </tr>
             </thead>
-            <%--<c:forEach items="${f}" var="iter" varStatus="rowStatus">--%>
-            <%--<tr>--%>
-            <%--<td>${iter.name}</td>--%>
-            <%--<td>${iter.price} &#8381;</td>--%>
-            <%--<td>${iter.quantity}</td>--%>
-            <%--<td width="20%"><input type="number" class="form-control" id="amount" name="amount" placeholder="0">--%>
-            <%--</td>--%>
-            <%--</tr>--%>
-            <%--</c:forEach>--%>
+            <c:forEach items="${order}" var="iter" varStatus="rowStatus">
+                <tr>
+                    <td>${iter.id}</td>
+                    <td>${iter.user.username}</td>
+                    <td>${iter.createDate}</td>
+                    <td>${iter.completeDate}</td>
+                    <td>${iter.subTotal}</td>
+                    <td>${iter.status}</td>
+                    </td>
+                </tr>
+            </c:forEach>
         </table>
-        <h3 id="total">Total:</h3>
     </form>
 </div>
 

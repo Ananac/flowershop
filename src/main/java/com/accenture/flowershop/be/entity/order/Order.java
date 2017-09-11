@@ -8,7 +8,7 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
-
+@Table(name = "\"ORDER\"")
 @Entity
 public class Order {
     @Id
@@ -16,32 +16,39 @@ public class Order {
     @Getter
     @Setter
     private Long id;
+
     @Getter
     @Setter
     private Date createDate;
+
     @Getter
     @Setter
     private Date completeDate;
 
-    @ManyToOne
-    @JoinColumn(name = "ID")
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "userId")
     @Getter
     @Setter
-    private User user;    //private Long userId
+    private User user;
+
     @Getter
     @Setter
     private BigDecimal subTotal;
 
+    @Enumerated(EnumType.STRING)
     @Getter
-    private enum status {
-        AWAITING_PAYMENT,
-        PROCESSING,
-        SHIPPED,
-        DELIVERED,
-        COMPLETED
-    }
+    @Setter
+    status status;
 
     public Order() {
+    }
+
+    public Order(User user, BigDecimal subTotal) {
+        this.user = user;
+        this.subTotal = subTotal;
+        this.createDate = new Date();
+        this.completeDate = null;
+        this.status = status.PROCESSING;
     }
 
 
@@ -53,7 +60,16 @@ public class Order {
                 ", completeDate=" + completeDate +
                 ", user=" + user +
                 ", subTotal=" + subTotal +
+                ", status=" + status +
                 '}';
+    }
+
+    public enum status {
+        AWAITING_PAYMENT,
+        PROCESSING,
+        SHIPPED,
+        DELIVERED,
+        COMPLETED
     }
 }
 

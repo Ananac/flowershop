@@ -1,5 +1,10 @@
 package com.accenture.flowershop.fe.servlets.order;
 
+import com.accenture.flowershop.be.business.order.OrderBusinessService;
+import com.accenture.flowershop.be.business.user.UserBusinessService;
+import com.accenture.flowershop.be.entity.order.Order;
+import com.accenture.flowershop.be.entity.user.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import javax.servlet.ServletConfig;
@@ -8,11 +13,18 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.math.BigDecimal;
+import java.util.List;
 
 @WebServlet(urlPatterns = "/order")
 
 public class OrderServlet extends HttpServlet {
+    @Autowired
+    OrderBusinessService obs;
+    UserBusinessService ubs;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
@@ -21,55 +33,37 @@ public class OrderServlet extends HttpServlet {
     }
 
     @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession(false);
+        User u = (User) session.getAttribute("u");
+
+        List<Order> orderslist = obs.getOrdersByUser(u);
+        session.setAttribute("order", orderslist);
+
+        req.getRequestDispatcher("/order.jsp").forward(req, resp);
+    }
+
+    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        try {
-            req.getRequestDispatcher("/order.jsp").forward(req, resp);
-        } catch (NullPointerException e) {
-            return;
-        }
+
+        HttpSession session = req.getSession(false);
+
+        User u = (User) session.getAttribute("u");
+        BigDecimal total = (BigDecimal) session.getAttribute("total");
+        obs.newOrder(u, total);
+     //   ubs.updateBalance(u.getUsername(), total);
+
+        List<Order> orderslist = obs.getOrdersByUser(u);
+
+        session.setAttribute("order", orderslist);
+
+        session.setAttribute("total", 0);
+        session.setAttribute("disct", 0);
+        session.removeAttribute("c");
+
+        req.getRequestDispatcher("/order.jsp").forward(req, resp);
+
     }
 }
 
 
-//    HttpSession session = req.getSession(false);
-//
-//    List<OrderItem> cart = (List<OrderItem>) session.getAttribute("cart");
-//        if (cart == null) {
-//                cart = new ArrayList<OrderItem>);
-//        }
-//
-//        Integer amount;
-//        List<Flower> flowers = service.getAllFlowers();
-//
-//        for (Flower flower : flowers) {
-//        long id = flower.getId();
-//        try {
-//        amount = Integer.parseInt(req.getParameter(String.valueOf(flower.getId())));
-//        } catch (NumberFormatException ex) {
-//        continue;
-//        }
-//
-//        if (!(amount > 0 && service.haveAmount(id, amount))) {
-//        continue;
-//        }
-//
-//        OrderItem item = new OrderItem(flower, amount);
-//        int index = cart.indexOf(item);
-//        if (index == -1) {
-//        cart.add(item);
-//        } else {
-//        amount += cart.get(index).getAmount();
-//        if (service.haveAmount(id, amount)) {
-//        cart.get(index).setAmount(amount);
-//        }
-//        }
-//        }
-//
-//        session.setAttribute("cart", cart);
-//        BigDecimal total = BigDecimal.ZERO;
-//        for (OrderItem item : cart) {
-//        total.add(item.getSubTotal());
-//        }
-//        session.setAttribute("total", total);
-//
-//        resp.sendRedirect("/profile/cart");

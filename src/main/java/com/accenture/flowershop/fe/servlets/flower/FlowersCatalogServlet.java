@@ -53,10 +53,7 @@ public class FlowersCatalogServlet extends HttpServlet {
 
                 if ((amount = Integer.parseInt(amountStr)) > 0) {
                     OrderItem item = new OrderItem(flower, amount);
-
-                    if (flower.getQuantity() >= amount) {
-                        cart.add(item);
-                    }
+                    cart.add(item);
                 }
             } catch (NumberFormatException e) {
                 continue;

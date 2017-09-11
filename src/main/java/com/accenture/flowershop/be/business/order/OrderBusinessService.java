@@ -3,11 +3,18 @@ package com.accenture.flowershop.be.business.order;
 import com.accenture.flowershop.be.entity.order.Order;
 import com.accenture.flowershop.be.entity.user.User;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.math.BigDecimal;
+import java.util.List;
 
 @Component
 public interface OrderBusinessService {
-    void createOrder(Order order);
-    void updateStatus(Order order);
+    @Transactional
+    Order newOrder(User user, BigDecimal subTotal);
+    @Transactional
+    List<Order> getAllOrders();
+    void completeOrder(Long id);
     void deleteOrder(Order order);
-    String getOrderByUser(User user);
+    List<Order> getOrdersByUser(User user);
 }

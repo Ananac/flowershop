@@ -26,30 +26,42 @@ public class ProfileServlet extends HttpServlet {
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
         SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this, config.getServletContext());
+
     }
 
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession(false);
+        User u = (User) session.getAttribute("u");
+        try {
+            u.getUsername();
+            session.setAttribute("bal", u.getBalance());
             req.getRequestDispatcher("/profile.jsp").forward(req, resp);
+        } catch (NullPointerException e) {
+            resp.sendRedirect("login");
+        }
     }
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
         HttpSession session = req.getSession(false);
-        session.setAttribute("total", 0);
-        session.setAttribute("disct", 0);
+        User u = (User) session.getAttribute("u");
+        try {
+            u.getUsername();
+            session.setAttribute("bal", u.getBalance());
+            session.setAttribute("total", 0);
+            session.setAttribute("disct", 0);
 //        String username = session.getAttribute("un").toString();//
 //        User u = ubs.getInfo(username);
 //        req.setAttribute("un", u.getUsername());
 //        req.setAttribute("bal", u.getBalance());
 //        req.setAttribute("disc", u.getDiscount());
 
-        List<OrderItem> cart = (List<OrderItem>) session.getAttribute("cart");
-        session.setAttribute("c", cart);
-        req.getRequestDispatcher("/profile.jsp").forward(req, resp);
-
-
+            List<OrderItem> cart = (List<OrderItem>) session.getAttribute("cart");
+            session.setAttribute("c", cart);
+            req.getRequestDispatcher("/profile.jsp").forward(req, resp);
+        } catch (NullPointerException e) {
+            resp.sendRedirect("login");
+        }
     }
-
 }

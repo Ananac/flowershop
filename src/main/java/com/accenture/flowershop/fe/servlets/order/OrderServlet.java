@@ -55,7 +55,7 @@ public class OrderServlet extends HttpServlet {
         User u = (User) session.getAttribute("u");
         try {
             u.getUsername();
-            BigDecimal total = (BigDecimal) session.getAttribute("total");
+            BigDecimal total = new BigDecimal((Integer)session.getAttribute("total"));
             obs.newOrder(u, total);
             u = ubs.updateBalance(u.getUsername(), total);
             session.setAttribute("u", u);

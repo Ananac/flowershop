@@ -52,7 +52,7 @@
                     <label>- Discount (<label><%= request.getSession(false).getAttribute("disc")%>%</label>):
                         <fmt:formatNumber value="${disct}" pattern="0"/> &#8381</label>
                     <hr align="right" width="170" color="#ff0000"/>
-                    <c:set var="total" value="${total - disct}" scope="session"/>
+                    <c:set var="total" value="${total - disct}"/>
                     <h3>Total: <fmt:formatNumber value="${total}" pattern="0"/> &#8381</h3>
                 </div>
                 <hr>

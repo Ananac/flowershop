@@ -1,6 +1,7 @@
 package com.accenture.flowershop.be.access.flower;
 
 import com.accenture.flowershop.be.entity.flower.Flower;
+import com.accenture.flowershop.be.entity.user.User;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.EntityManager;
@@ -26,29 +27,24 @@ public class FlowerDAOImpl implements FlowerDAO {
         }
     }
 
-    public Flower getByName(String name) {
-        TypedQuery<Flower> query = em.createQuery("select f from Flower f where f.name=:name", Flower.class);
-        query.setParameter("name", name);
-        Flower flower = query.getSingleResult();
-
-        return flower;
+    public Flower getById(Long id) {
+        try {
+            TypedQuery<Flower> query = em.createQuery("select f from Flower f where f.id=:id", Flower.class);
+            query.setParameter("id", id);
+            return query.getSingleResult();
+        } catch (NoResultException ex) {
+            return null;
+        }
     }
 
-    public void updateQuantity(Long id, int quantity) {
-
-    }
-
-
-    public List<Flower> getByPriceRange(BigDecimal minPrice, BigDecimal maxPrice) {
-        TypedQuery<Flower> query = em.createQuery("select f from Flower f where f.price >= :minPrice and" +
-                "  f.price <= :maxPrice", Flower.class);
-        List<Flower> flowers = query.getResultList();
-
-        return flowers;
-    }
 
 
     public Flower update(Flower flower) {
-        return null;
+        try {
+            return em.merge(flower);
+        } catch (NoResultException ex) {
+            return null;
+        }
     }
 }
+

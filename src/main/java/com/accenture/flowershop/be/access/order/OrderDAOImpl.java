@@ -18,7 +18,7 @@ public class OrderDAOImpl implements OrderDAO {
     public List<Order> getOrders() {
         List<Order> orders = null;
         try {
-            TypedQuery<Order> query = em.createQuery("select o from Order o", Order.class);
+            TypedQuery<Order> query = em.createQuery("select o from Order o ORDER BY o.status, o.createDate", Order.class);
             orders = query.getResultList();
             return orders;
         } catch (NoResultException ex) {

@@ -18,7 +18,7 @@ public class OrderDAOImpl implements OrderDAO {
     public List<Order> getOrders() {
         List<Order> orders = null;
         try {
-            TypedQuery<Order> query = em.createQuery("select o from Order o ORDER BY o.status, o.createDate", Order.class);
+            TypedQuery<Order> query = em.createQuery("select o from Order o ORDER BY o.status, o.createDate desc ", Order.class);
             orders = query.getResultList();
             return orders;
         } catch (NoResultException ex) {
@@ -48,7 +48,7 @@ public class OrderDAOImpl implements OrderDAO {
 
     public Order getById(Long id) {
         try {
-            TypedQuery<Order> query = em.createQuery("select o from Order o where o.id=:id", Order.class);
+            TypedQuery<Order> query = em.createQuery("select o from Order o where o.id=:id ORDER BY o.status, o.createDate desc ", Order.class);
             query.setParameter("id", id);
             Order order = query.getSingleResult();
             return order;
@@ -65,7 +65,7 @@ public class OrderDAOImpl implements OrderDAO {
     public List<Order> getOrderByUser(User user) {
         List<Order> orders = null;
         try {
-            TypedQuery<Order> query = em.createQuery("select o from Order o where o.user=:user", Order.class);
+            TypedQuery<Order> query = em.createQuery("select o from Order o where o.user=:user ORDER BY o.status, o.createDate desc ", Order.class);
             query.setParameter("user", user);
             orders = query.getResultList();
             return orders;

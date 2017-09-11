@@ -36,10 +36,8 @@ public class RegisterServlet extends HttpServlet {
         String password = request.getParameter("inputPassword");
         String fullName = request.getParameter("inputFullName");
         String city = request.getParameter("inputCity");
-
         String zip = request.getParameter("inputZipcode");
         int zipcode = parseInt(zip);
-
         String address = request.getParameter("inputAddress");
 
         try {
@@ -57,7 +55,6 @@ public class RegisterServlet extends HttpServlet {
 
         }
     }
-
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

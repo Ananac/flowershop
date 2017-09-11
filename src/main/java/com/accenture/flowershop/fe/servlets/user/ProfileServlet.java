@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.List;
 
 @WebServlet(urlPatterns = "/profile")
@@ -34,9 +35,9 @@ public class ProfileServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        try {
         HttpSession session = req.getSession(false);
         User u = (User) session.getAttribute("u");
-        try {
             u.getUsername();
             session.setAttribute("bal", u.getBalance());
             req.getRequestDispatcher("/profile.jsp").forward(req, resp);
@@ -51,7 +52,7 @@ public class ProfileServlet extends HttpServlet {
         try {
             u.getUsername();
             session.setAttribute("bal", u.getBalance());
-            session.setAttribute("total", 0);
+            session.setAttribute("total", BigDecimal.ZERO);
             session.setAttribute("disct", 0);
 
             List<OrderItem> cart = (List<OrderItem>) session.getAttribute("cart");
@@ -64,7 +65,6 @@ public class ProfileServlet extends HttpServlet {
                     continue;
                 }
             }
-
             req.getRequestDispatcher("/profile.jsp").forward(req, resp);
         } catch (NullPointerException e) {
             resp.sendRedirect("login");

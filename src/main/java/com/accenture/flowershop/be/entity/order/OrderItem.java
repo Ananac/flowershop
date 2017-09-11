@@ -41,7 +41,7 @@ public class OrderItem {
     public OrderItem(Flower flower, int amount) {
         this.flower = flower;
         this.amount = amount;
-        cost = flower.getPrice().multiply(new BigDecimal(amount));
+        cost = flower.getPrice().multiply(new BigDecimal(amount)).setScale(0, BigDecimal.ROUND_HALF_UP);
     }
 
     @Override

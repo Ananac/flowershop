@@ -35,10 +35,8 @@ public class AdminServlet extends HttpServlet {
         User u = (User) session.getAttribute("u");
         try {
             if (u.isAdmin()) {
-
                 List<Order> orderslist = obs.getAllOrders();
                 session.setAttribute("order", orderslist);
-
                 req.getRequestDispatcher("/orders.jsp").forward(req, resp);
             } else {
                 resp.sendRedirect("index.jsp");
@@ -55,7 +53,6 @@ public class AdminServlet extends HttpServlet {
         try {
             if (u.isAdmin()) {
                 List<Order> orders = obs.getAllOrders();
-
                 for (Order order : orders) {
                     String isPushed = req.getParameter("close" + order.getId());
                     if (isPushed != null) {

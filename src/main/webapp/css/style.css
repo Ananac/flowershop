@@ -14,7 +14,7 @@ body {
    width: 700px
 }
 
-form#order {
+#order {
     text-align: center;
     width: 500px;
 }

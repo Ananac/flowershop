@@ -37,7 +37,7 @@ public class UserBusinessServiceImpl implements UserBusinessService {
     public User updateBalance(String username, BigDecimal total) {
         User u = dao.getByUsername(username);
         BigDecimal oldBalance = u.getBalance();
-        u.setBalance((oldBalance.subtract(total)).setScale(2,BigDecimal.ROUND_HALF_UP));;
+        u.setBalance((oldBalance.subtract(total)).setScale(0,BigDecimal.ROUND_HALF_UP));;
         dao.update(u);
         return u;
     }

@@ -33,7 +33,7 @@ public class User {
     private String address;
     @Getter
     @Setter
-    private BigDecimal balance = new BigDecimal(500).setScale(2,BigDecimal.ROUND_HALF_UP);
+    private BigDecimal balance = new BigDecimal(500).setScale(0,BigDecimal.ROUND_HALF_UP);
     @Getter
     @Setter
     private int discount = 0;

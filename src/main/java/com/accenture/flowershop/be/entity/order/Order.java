@@ -45,7 +45,8 @@ public class Order {
 
     public Order(User user, BigDecimal subTotal) {
         this.user = user;
-        this.subTotal = subTotal.setScale(2,BigDecimal.ROUND_HALF_UP);
+        this.subTotal = subTotal;
+        this.subTotal = this.subTotal.setScale(0,BigDecimal.ROUND_HALF_UP);
         this.createDate = new Date();
         this.completeDate = null;
         this.status = status.PROCESSING;

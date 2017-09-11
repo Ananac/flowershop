@@ -35,9 +35,9 @@ public class OrderServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        try {
         HttpSession session = req.getSession(false);
         User u = (User) session.getAttribute("u");
-        try {
             u.getUsername();
             List<Order> orderslist = obs.getOrdersByUser(u);
             session.setAttribute("order", orderslist);
@@ -51,11 +51,11 @@ public class OrderServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        try {
         HttpSession session = req.getSession(false);
         User u = (User) session.getAttribute("u");
-        try {
             u.getUsername();
-            BigDecimal total = new BigDecimal((Integer)session.getAttribute("total"));
+            BigDecimal total = (BigDecimal) session.getAttribute("total");
             obs.newOrder(u, total);
             u = ubs.updateBalance(u.getUsername(), total);
             session.setAttribute("u", u);
@@ -64,7 +64,7 @@ public class OrderServlet extends HttpServlet {
             List<Order> ordersList = obs.getOrdersByUser(u);
             session.setAttribute("order", ordersList);
 
-            session.setAttribute("total", 0);
+            session.setAttribute("total", BigDecimal.ZERO);
             session.setAttribute("disct", 0);
             session.removeAttribute("c");
 

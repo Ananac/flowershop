@@ -31,7 +31,7 @@
                     <td>${iter.user.username}</td>
                     <td>${iter.createDate}</td>
                     <td>${iter.completeDate}</td>
-                    <td>${iter.subTotal}</td>
+                    <td>${iter.subTotal} &#8381</td>
                     <td>${iter.status}</td>
                     </td>
                 </tr>

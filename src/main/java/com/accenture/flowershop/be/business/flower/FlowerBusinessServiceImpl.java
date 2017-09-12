@@ -36,7 +36,7 @@ public class FlowerBusinessServiceImpl implements FlowerBusinessService {
 
     public Flower updateFlowersQuantity(Long id, int quantity) {
         Flower f = dao.getById(id);
-        f.setQuantity(quantity);
+        f.setQuantity(f.getQuantity() - quantity);
         dao.update(f);
         return f;
     }

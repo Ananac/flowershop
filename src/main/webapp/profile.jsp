@@ -12,20 +12,19 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 
-<body>
-<br>
+<body><br>
 <div class="row">
     <div class="col-sm-3" id="balance">
         <h2>Hello, ${un}</h2>
         <a href="flowers"><img class="check" src="http://www.freeiconspng.com/uploads/red-flower-icon-18.png"
                                width="200px"></a><br><br>
-
-
     </div>
 
     <div class="col-sm-5">
+
         <div class="center" id="cart1">
             <h2>Your cart</h2>
+
             <div class="center" id="cart">
                 <table class="table">
                     <thead bgcolor="#dc3545">
@@ -46,6 +45,7 @@
                         </tr>
                     </c:forEach>
                 </table>
+
                 <div id="totaldiv">
                     <label>Subtotal: ${total} &#8381</label><br>
                     <c:set var="disct" value="${total*(disc/100)}"/>
@@ -53,9 +53,9 @@
                         <fmt:formatNumber value="${disct}" pattern="0"/> &#8381</label>
                     <hr align="right" width="170" color="#ff0000"/>
                     <c:set var="total" value="${total - disct}" scope="session"/>
-                    <h3>Total: <fmt:formatNumber value="${total}" pattern="0"/> &#8381</h3>
-                </div>
-                <hr>
+                    <h3>Total: <fmt:formatNumber value="${sessionScope.total}" pattern="0"/> &#8381</h3>
+                </div><hr>
+
                 <form action="flowers">
                     <input type="submit" value="Edit cart" class="btn btn-outline-danger"/>
                 </form>
@@ -72,12 +72,10 @@
             <h2>Info</h2>
             <div id="info">
                 <h4>${fullname}</h4>
-                <h4>${zipcode}, ${city}, ${address}</h4>
-                <hr>
+                <h4>${zipcode}, ${city}, ${address}</h4><hr>
                 <h4>Discount: <%= request.getSession(false).getAttribute("disc")%>%</h4>
                 <h4>Balance: <%= request.getSession(false).getAttribute("bal")%> &#8381;</h4>
-            </div>
-            <br>
+            </div><br>
             <form action="order">
                 <input type="submit" value="Orders" class="btn btn-outline-danger"/>
             </form>
@@ -91,7 +89,6 @@
 
 <script type="text/javascript">
     function validateForm() {
-
         if (parseInt('${total}') == 0) {
             alert("Cart is empty");
             return false;

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.util.List;
+
 @Component
 public class FlowerBusinessServiceImpl implements FlowerBusinessService {
     @Autowired
@@ -28,13 +29,16 @@ public class FlowerBusinessServiceImpl implements FlowerBusinessService {
     }
 
 
-
     public List<Flower> getFlowerByPriceRange(BigDecimal minPrice, BigDecimal maxPrice) {
         return null;
     }
 
 
-    public void updateFlowersQuantity(Long id, int quantity) {
-
+    public Flower updateFlowersQuantity(Long id, int quantity) {
+        Flower f = dao.getById(id);
+        f.setQuantity(f.getQuantity() - quantity);
+        dao.update(f);
+        return f;
     }
 }
+

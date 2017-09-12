@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -24,6 +23,7 @@ import java.util.List;
 public class OrderServlet extends HttpServlet {
     @Autowired
     OrderBusinessService obs;
+    @Autowired
     UserBusinessService ubs;
 
     @Override
@@ -34,35 +34,44 @@ public class OrderServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        try {
         HttpSession session = req.getSession(false);
         User u = (User) session.getAttribute("u");
+            u.getUsername();
+            List<Order> orderslist = obs.getOrdersByUser(u);
+            session.setAttribute("order", orderslist);
 
-        List<Order> orderslist = obs.getOrdersByUser(u);
-        session.setAttribute("order", orderslist);
-
-        req.getRequestDispatcher("/order.jsp").forward(req, resp);
+            req.getRequestDispatcher("/order.jsp").forward(req, resp);
+        } catch (NullPointerException e) {
+            resp.sendRedirect("login");
+        }
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        try {
         HttpSession session = req.getSession(false);
-
         User u = (User) session.getAttribute("u");
-        BigDecimal total = (BigDecimal) session.getAttribute("total");
-        obs.newOrder(u, total);
-     //   ubs.updateBalance(u.getUsername(), total);
+            u.getUsername();
+            BigDecimal total = (BigDecimal) session.getAttribute("total");
+            obs.newOrder(u, total);
+            u = ubs.updateBalance(u.getUsername(), total);
+            session.setAttribute("u", u);
+            session.setAttribute("bal", u.getBalance());
 
-        List<Order> orderslist = obs.getOrdersByUser(u);
+            List<Order> ordersList = obs.getOrdersByUser(u);
+            session.setAttribute("order", ordersList);
 
-        session.setAttribute("order", orderslist);
+            session.setAttribute("total", BigDecimal.ZERO);
+            session.setAttribute("disct", 0);
+            session.removeAttribute("c");
 
-        session.setAttribute("total", 0);
-        session.setAttribute("disct", 0);
-        session.removeAttribute("c");
-
-        req.getRequestDispatcher("/order.jsp").forward(req, resp);
-
+            req.getRequestDispatcher("/order.jsp").forward(req, resp);
+        } catch (NullPointerException e) {
+            resp.sendRedirect("login");
+        }
     }
 }
 

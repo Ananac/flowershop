@@ -3,6 +3,7 @@ package com.accenture.flowershop.fe.servlets.flower;
 import com.accenture.flowershop.be.business.flower.FlowerBusinessService;
 import com.accenture.flowershop.be.entity.flower.Flower;
 import com.accenture.flowershop.be.entity.order.OrderItem;
+import com.accenture.flowershop.be.entity.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
@@ -30,36 +31,42 @@ public class FlowersCatalogServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<Flower> flowers = fbs.flowersList();
         HttpSession session = req.getSession(false);
-        session.setAttribute("f", flowers);
-        req.getRequestDispatcher("/flowers.jsp").forward(req, resp);
+        User u = (User) session.getAttribute("u");
+        try {
+            u.getUsername();
+            List<Flower> flowers = fbs.flowersList();
+            session.setAttribute("f", flowers);
+            req.getRequestDispatcher("/flowers.jsp").forward(req, resp);
+        } catch (NullPointerException e) {
+            resp.sendRedirect("login");
+        }
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession(false);
-
-
-        List<OrderItem> cart = new ArrayList<OrderItem>();
-        List<Flower> flowers = fbs.flowersList();
-        Integer amount;
-
-        for (Flower flower : flowers) {
-
-            String amountStr = req.getParameter("amount" + flower.getId());
-            try {
-
-
-                if ((amount = Integer.parseInt(amountStr)) > 0) {
-                    OrderItem item = new OrderItem(flower, amount);
-                    cart.add(item);
+        User u = (User) session.getAttribute("u");
+        try {
+            u.getUsername();
+            List<OrderItem> cart = new ArrayList<OrderItem>();
+            List<Flower> flowers = fbs.flowersList();
+            Integer amount;
+            for (Flower flower : flowers) {
+                String amountStr = req.getParameter("amount" + flower.getId());
+                try {
+                    if ((amount = Integer.parseInt(amountStr)) > 0) {
+                        OrderItem item = new OrderItem(flower, amount);
+                        cart.add(item);
+                    }
+                } catch (NumberFormatException e) {
+                    continue;
                 }
-            } catch (NumberFormatException e) {
-                continue;
             }
+            session.setAttribute("cart", cart);
+            req.getRequestDispatcher("profile").forward(req, resp);
+        } catch (NullPointerException e) {
+            resp.sendRedirect("login");
         }
-        session.setAttribute("cart", cart);
-        req.getRequestDispatcher("profile").forward(req, resp);
     }
 }

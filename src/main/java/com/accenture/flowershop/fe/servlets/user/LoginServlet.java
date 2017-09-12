@@ -40,9 +40,8 @@ public class LoginServlet extends HttpServlet {
             HttpSession session = request.getSession();
             session.setAttribute("u", u);
             session.setAttribute("un", username);
-            session.setAttribute("bal", u.getBalance());
             session.setAttribute("disc", u.getDiscount());
-
+            session.setAttribute("bal", u.getBalance());
             session.setAttribute("fullname", u.getFullName());
             session.setAttribute("city", u.getCity());
             session.setAttribute("zipcode", u.getZipcode());

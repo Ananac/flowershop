@@ -11,5 +11,5 @@ public interface FlowerBusinessService {
     Flower getFlower(String name);
     List<Flower> flowersList();
     List<Flower> getFlowerByPriceRange(BigDecimal minPrice, BigDecimal maxPrice);
-    void updateFlowersQuantity(Long id, int quantity);
+    Flower updateFlowersQuantity(Long id, int quantity);
 }

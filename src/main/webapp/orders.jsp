@@ -11,7 +11,7 @@
 </head>
 <body>
 <div class="center">
-    <form id="order" action="orders" method="post">
+    <form id="orderss" action="orders" method="post">
         <table class="table" id="orders">
             <thead bgcolor="#dc3545">
             <tr>
@@ -30,10 +30,10 @@
                     <td>${iter.user.username}</td>
                     <td>${iter.createDate}</td>
                     <td>${iter.completeDate}</td>
-                    <td>${iter.subTotal}</td>
+                    <td>${iter.subTotal} &#8381</td>
                     <td>${iter.status}</td>
                     <td width="20%">
-                        <form action="orders" method="post" onsubmit="return CheckClose()">
+                        <form action="orders" method="post">
                             <input type="submit" class="btn btn-large btn-danger" id="${iter.id}" name="close${iter.id}"
                                    value="Close">
                         </form>

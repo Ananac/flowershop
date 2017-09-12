@@ -11,10 +11,10 @@ body {
 }
 
 #orders {
-   width: 600px
+   width: 700px
 }
 
-form#order {
+#order {
     text-align: center;
     width: 500px;
 }

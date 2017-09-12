@@ -14,7 +14,7 @@
 </head>
 
 <body>
-<a href="profile">
+<a href="profile" style="color:black">
 <div class="center"><label>Flowers</label><img src="http://www.freeiconspng.com/uploads/red-flower-icon-18.png"
                                                width="30px"></div></a>
 <hr>
